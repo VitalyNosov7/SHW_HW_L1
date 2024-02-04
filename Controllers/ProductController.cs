@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using StoreMarket.Contexts;
 using StoreMarket.Contracts.Requests;
 using StoreMarket.Contracts.Responses;
@@ -62,6 +63,13 @@ namespace StoreMarket.Controllers
                 return BadRequest(ex.Message);
             }
 
+        }
+
+        [HttpDelete]
+        [Route("products")]
+        public void DeleteProduct(int id)
+        {
+            storeContext.Products.Where(p => p.Id == id).ExecuteDelete();
         }
     }
 }
